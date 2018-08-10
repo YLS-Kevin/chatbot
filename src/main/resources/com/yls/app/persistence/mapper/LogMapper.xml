@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yls.app.persistence.mapper.LogMapper">
+
+	<insert id="insertClientUserUseLog">
+		insert into ROBOT_CLIENT_USE_LOG(id, id_cu, cip, lon, lat, scity, saddr, vdate, mansay, robotsay, participle, isfind)
+		values(#{id}, #{id_cu}, #{cip}, #{lon}, #{lat}, #{scity}, #{saddr}, #{vdate}, #{mansay}, #{robotsay}, #{participle}, #{isfind})
+	</insert>
+	
+	<insert id="insertClientUser">
+		insert into ROTOT_CLIENT(id, cid, cuserid, cname, usenum, create_date, update_date)
+		values(#{id}, #{cid}, #{cuserid}, #{cname}, #{usenum}, #{create_date}, #{update_date})
+	</insert>
+	
+	<update id="updateClientUser">
+		update ROTOT_CLIENT cu 
+		set cu.usenum = #{usenum}, update_date = #{update_date} 
+		where cu.id = #{id}
+	</update>
+	
+	<select id="findClientUser" resultType="clientUser">
+		select * 
+		from ROTOT_CLIENT cu 
+		where cu.cid = #{cid} and cu.cuserid = #{cuserid}
+	</select>
+
+</mapper>

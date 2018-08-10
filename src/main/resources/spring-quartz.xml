@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<!-- 缓存个性词库 -->
+    <bean id="personalWordExecutorJobTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="personalWordExecutorJob"/>
+        </property>
+        <property name="targetMethod">
+            <value>execute</value>
+        </property>
+         <property name="concurrent">
+            <value>false</value>
+        </property>
+    </bean>
+
+    <!-- 缓存个性词库-定义触发时间 -->
+    <bean id="personalWordExecutorJobSchedual" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="personalWordExecutorJobTask"/>
+        </property>
+        <property name="cronExpression">
+            <value>0 0/3 * * * ?</value>
+        </property>
+    </bean>
+
+	<!-- 调度管理 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startQuertz" lazy-init="true" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				
+				<ref bean="personalWordExecutorJobSchedual" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

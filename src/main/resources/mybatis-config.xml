@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="lazyLoadingEnabled" value="false"/>
+    </settings>
+
+    <typeAliases>
+    	<typeAlias type="com.yls.app.entity.Account" alias="account"/>
+        <typeAlias type="com.yls.app.entity.Word" alias="word"/>
+        <typeAlias type="com.yls.app.entity.ClientUser" alias="clientUser"/>
+        <typeAlias type="com.yls.app.entity.Client" alias="client"/>
+        <typeAlias type="com.yls.app.entity.DialogMoreAndOne2" alias="dialogMoreAndOne2"/>
+        <typeAlias type="com.yls.app.entity.DialogType2" alias="dialogType2"/>
+        <typeAlias type="com.yls.app.entity.DialogExp" alias="dialogExp"/>
+        <typeAlias type="com.yls.app.entity.DWordGroup" alias="dWordGroup"/>
+    </typeAliases>
+
+</configuration> 

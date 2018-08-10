@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yls.app.persistence.mapper.ClientCacheMapper">
+
+	<select id="findDialogTypeSelfById" resultType="dialogType2">
+		select rm.cid, rm.cid_m, dt.id as id_dt from robots_module rm
+		left join DIALOG_TYPES dt 
+		on dt.cid_m = rm.cid_m
+		where rm.cid_m = #{cid_m}
+	</select>
+	
+	<select id="findDialogTypeById" resultType="dialogType2">
+		select * from ROBOTS_AND_DIALOG_TYPES radt
+		where radt.id = #{id};
+	</select>
+
+	<select id="findDialogIdByCid_m" resultType="java.lang.String">
+		select d.id from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		where dt.cid_m = #{cid_m};
+	</select>
+</mapper>

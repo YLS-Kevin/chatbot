@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yls.app.persistence.mapper.WordCacheMapper">
+	
+	<select id="findAllWordByDialogType2" resultType="word">
+	<![CDATA[
+		select DISTINCT ddw.id_dwg, ddw.wname, ddw.wx, ddw.wften, ddw.wx2, ddw.wften2, ddw.group_name, ddw.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join(
+			select w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+			from WORDS w
+			left join DWORDGROUP dw
+			on w.id_dwg = dw.id
+			where w.id_dwg not in('city', 'datetime', 'wz')
+		) ddw
+		on dm.aword1dyna = CONCAT(CONCAT('(&', ddw.group_name),'&)')
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT ddw.id_dwg, ddw.wname, ddw.wx, ddw.wften, ddw.wx2, ddw.wften2, ddw.group_name, ddw.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join(
+			select w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+			from WORDS w
+			left join DWORDGROUP dw
+			on w.id_dwg = dw.id
+			where w.id_dwg not in('city', 'datetime', 'wz')
+		) ddw
+		on dm.aword2dyna = CONCAT(CONCAT('(&', ddw.group_name),'&)')
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT ddw.id_dwg, ddw.wname, ddw.wx, ddw.wften, ddw.wx2, ddw.wften2, ddw.group_name, ddw.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join(
+			select w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+			from WORDS w
+			left join DWORDGROUP dw
+			on w.id_dwg = dw.id
+			where w.id_dwg not in('city', 'datetime', 'wz')
+		) ddw
+		on dm.aword3dyna = CONCAT(CONCAT('(&', ddw.group_name),'&)')
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT ddw.id_dwg, ddw.wname, ddw.wx, ddw.wften, ddw.wx2, ddw.wften2, ddw.group_name, ddw.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join(
+			select w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+			from WORDS w
+			left join DWORDGROUP dw
+			on w.id_dwg = dw.id
+			where w.id_dwg not in('city', 'datetime', 'wz')
+		) ddw
+		on dm.aword4dyna = CONCAT(CONCAT('(&', ddw.group_name),'&)')
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT ddw.id_dwg, ddw.wname, ddw.wx, ddw.wften, ddw.wx2, ddw.wften2, ddw.group_name, ddw.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join(
+			select w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+			from WORDS w
+			left join DWORDGROUP dw
+			on w.id_dwg = dw.id
+			where w.id_dwg not in('city', 'datetime', 'wz')
+		) ddw
+		on dm.aword5dyna = CONCAT(CONCAT('(&', ddw.group_name),'&)')
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+	]]>
+	</select>
+	
+	<select id="findAllWordByDialogType" resultType="word">
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword1 = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword2 = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword3 = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword4 = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword5 = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword1near = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword2near = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword3near = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword4near = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+		UNION
+		select DISTINCT w.id_dwg, w.wname, w.wx, w.wften, w.wx2, w.wften2, dw.group_name, w.synonym
+		from DIALOG_TYPES dt
+		left join DIALOG d
+		on d.id_dt = dt.id
+		left join DIALOG_MAN dm
+		on d.id = dm.id_d
+		left join WORDS w
+		on dm.aword5near = w.wname
+		left join DWORDGROUP dw
+		on w.id_dwg = dw.id
+		where dt.is_share = '1' and dt.state = 1 and dt.del_flag = '0' and d.state = 1 and d.del_flag = '0' and dt.id = #{id}
+	</select>
+	
+	<select id="findAllDialogTypeByAccountId" resultType="java.lang.String">
+		select radt.id_dt from account a
+		left join robots r
+		on a.id = r.id_ac
+		left join robots_module rm
+		on r.id = rm.cid
+		left join ROBOTS_AND_DIALOG_TYPES radt
+		on rm.cid = radt.cid
+		where a.del_flag = '0' and a.state = '1' and r.state = '1' and r.del_flag = '0' and rm.state = '1' and rm.del_flag = '0' 
+		and a.id = #{id} and radt.id_dt is not null
+	</select>
+	
+	<select id="findWordTypeById" resultType="dWordGroup">
+		select dwg.group_name, dwg.id_ac, dwg.id
+		from DWORDGROUP dwg 
+		where dwg.id = #{id};
+	</select>
+	
+	<select id="findByAccountId" resultType="word">
+		select w.id, w.id_ac, w.wname, w.autoin, w.wften, w.wften2, w.wx, w.wx2, w.state, w.remarks, dwg.group_name, w.synonym
+		from WORDS w 
+		left join DWORDGROUP dwg on w.id_dwg = dwg.id 
+		where (w.id_ac = '1' or w.id_ac = #{id}) and w.state = '1'
+	</select>
+	
+	<select id="findAllAccount" resultType="account">
+		select * 
+		from account a
+		where a.state = '1' and del_flag = '0'
+	</select>
+	
+	<select id="findAutoin" resultType="word">
+		select b.id, b.id_ac, b.wname, b.autoin, b.wften, b.wften2, b.wx, b.wx2, b.state, b.remarks 
+		from WORDS b
+		where b.autoin = 1;
+	</select>
+	
+	<select id="findAll" resultType="word">
+		select w.id, w.id_ac, w.wname, w.wx, w.wx2, w.wften, w.wften2, w.autoin 
+		from WORDS w
+	</select>
+	
+	<select id="findCoreWords" resultType="word">
+		select a.id, a.id_ac, a.wname, a.autoin, a.wften, a.wften2, a.wx, a.wx2, a.state, a.remarks from 
+		(select * from WORDS w where w.autoin = 2) a
+		left outer join 
+		(select * from WORDS w where w.autoin = 1) b 
+		on a.wname = b.wname 
+		where b.id is null and a.state = 1;
+	</select>
+	
+	<select id="findUserWords" resultType="word">
+		select b.id, b.id_ac, b.wname, b.autoin, b.wften, b.wften2, b.wx, b.wx2, b.state, b.remarks from 
+		(select * from WORDS w where w.autoin = 2) a
+		right outer join 
+		(select * from WORDS w where w.autoin = 1) b 
+		on a.wname = b.wname 
+		where a.id is null and b.state = 1;
+	</select>
+	
+	<select id="findCommonWords" resultType="word">
+		select a.id, a.id_ac, a.wname, a.autoin, a.wften, a.wften2, a.wx, a.wx2, a.state, a.remarks from 
+		(select * from WORDS w where w.autoin = 2) a
+		inner join 
+		(select * from WORDS w where w.autoin = 1) b 
+		on a.wname = b.wname
+		where a.state = 1;
+	</select>
+	
+	<insert id="insertDWordGroup">
+		insert into DWORDGROUP(id, id_ac, group_name, group_cn_name, is_share, state, sort, remarks, create_by, create_date, update_by, update_date)
+		values(#{id}, #{id_ac}, #{group_name}, #{group_cn_name}, #{is_share}, #{state}, #{sort}, #{remarks}, #{create_by}, #{create_date}, #{update_by}, #{update_date})
+	</insert>
+	
+	<insert id="insertDWord">
+		insert into DWORDS(id, id_ac, id_dwg, dwname, state, sort)
+		values(#{id}, #{id_ac}, #{id_dwg}, #{dwname}, #{state}, #{sort})
+	</insert>
+	
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yls.app.persistence.mapper.KeyWordMapper">
+
+	<insert id="insert">
+		insert into WORDS(id, id_ac, wname, wx, wx2, wften, wften2, autoin, sort, remarks, create_by, create_date, update_by, update_date)
+		values(#{id}, #{id_ac}, #{wname}, #{wx}, #{wx2}, #{wften}, #{wften2}, #{autoin}, #{sort}, #{remarks}, #{create_by}, #{create_date}, #{update_by}, #{update_date})
+	</insert>
+
+</mapper>
